@@ -1,141 +1,73 @@
 **Falls euch meine Arbeit gefällt :** <br>
 
-[![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3EYML5A4EMJCW&source=url) 
+[![Paypal Donation](https://img.shields.io/badge/paypal-donate%20%7C%20spenden-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3EYML5A4EMJCW&source=url)
 
 
-# js.device-reminder: Überwachungsscript für ioBroker (Version 1.2.1)
-Dies ist ein Script zur Ermittlung und Auswertung von beliebig vielen elektrischen Verbrauchen, die mittels Schalt-Mess-Aktoren in ioBroker überwacht werden. Bei Erreichen des Start oder Endzustandes kann man sich zusätzlich benachrichtigen lassen.
+# js.BWM-Script: Überwachungsscript für ioBroker (Version 0.2)
+Dieses Script ermöglicht es, unzählige Bewegungsmelder, Schaltaktoren (Steckdosen, Lampen, etc.) und Lichtsensoren im ioBroker miteinander zu verknüpfen
 
-# Was sollte beachtet werden?
-Der refresh Intervall vom "Verbrauchswert(heißt bei den meisten Geräten "energy")" sollte nicht mehr als 10 Sekunden betragen, da es sonst zu sehr stark verzögerten Meldungen kommen kann.
-Befehl in der Tasmota Konsole : TelePeriod 10 <br>
-**Wichtig** Solltet ihr von einer Version **kleiner 1.2.x** kommen: Bevor das Script geladen wird, unter **0_userdata.0.Verbrauch.** schauen, ob der Ordner "Verbrauch" bereits vorhanden ist. Wenn ja, diesen unbedingt löschen und danach das Script starten!
+## Was sollte beachtet werden und was ist möglich?
+Der timeout beginnt erst dann zu laufen, wenn der Datenpunkt "motion" des jeweiligen Bewegungsmelders den Wert "false" zurückgibt. Sollten mehrere Bewegungsmelder eine Lampe schalten, wird gewartet bis alle BWM "false" melden. <br>
+*Hinweis*: Die Einschaltdauer sollte nicht nur wenige Sekunden betragen, da einige Bewegungsmelder einen cooldown haben, bevor sie wieder Bewegungen erkennen und melden. Da führt dazu, dass eventuell Lampen bei zu kurzer Einschaltdauer ausschalten, obwohl man noch im Raum ist! <br>
+Wird ein Lichtsensor verwendet, kann man ihn pro Bewegungsmelder zuordnen. Auch kann man die Einschaltdauer pro Lampe einzeln festlegen. Das Script ist modular aufgebaut, d.h. es kann jeder Bewegungsmelder mit jeder Lampe (auch mehreren) gekoppelt werden. Das gleiche gilt für Lichtsensoren. <br>
 
-# Welche Geräte können zur Zeit überwacht werden?
-- Waschmaschine,
-- Trockner,
-- Geschirrspüler,
-- Wasserkocher,
-- Computer,
-- Test -> falls man ein Gerät testen möchte, welches nicht in der oben genannten Liste auftaucht <br>
-<br>
-- weitere werden folgen ...<br>
 
-# Was ist pro Gerät möglich?
-- Benachrichtigung beim Gerätestart
-- Benachrichtigung beim Vorgangsende des jeweiligen Gerätestart 
-- Telegram-Benachrichtigung (mehrere IDs sind möglich) 
-- Alexa-Benachrichtigung (mehrere IDs sind möglich) 
-- WhatsApp-Benachrichtung 
-- Geräte bei Bedarf abschalten, wenn Vorgang beendet erkannt wurde<br>
+## Script-Updates einspielen
+- Das Script ist so aufgebaut, dass Updates keinen Einfluss auf eure Geräteliste haben. Ihr müsst eure Geräte nur einmal anlegen und das wars dann auch schon. Die folgende Zeile gibt euch einen Hinweis darauf, ab wo ihr das Script bei einem Update kopieren und wieder einfügen müsst. <br>
+  ![update_Zeile.png](/admin/update_Zeile.png)
+ <br>
+
 
 # Anleitung
-## Script erstellen und Benutzereingaben anpassen
-1. Ein neues JS Script in iobroker erstellen und das Script aus "script-device-reminder-1-2-x.js" kopieren und einfügen. <br>
+## Script erstellen
+Ein neues JS Script in iobroker erstellen und das Script aus "script-bwm-script.js" kopieren und einfügen. <br>
 
-  ![erstellung1.jpg](/admin/erstellung1.jpg)
-  ![erstellung2jpg](/admin/erstellung2.jpg)<br>
+  ![erstellung_1.png](/admin/erstellung_1.png)
+  ![erstellung_2.png](/admin/erstellung_2.png)
+  <br>
 
-### Eigenes Gerät hinzufügen
-2. Die gewünschten Geräte hinzufügen wie im folgenden beschrieben:<br>
-  ![erstellung3jpg](/admin/erstellung3.jpg)
-  - **'Gerät anlegen'** alles zwischen **/*von hier*/** bis **/*bis hier kopieren*/** kopieren und erneut einfügen. Dies muss für jedes Gerät durchgeführt werden.
-  - **'geraeteName'** kann durch einen beliebigen Namen ersetzt werden
-  - **'geraeteTyp'** hier muss ein Gerätetyp aus der Liste unten ausgewählt werden
-  - **'currentConsumption'** Hier muss der DP ausgewaehlt werden, welcher den Verbrauch misst
-  - **'switchPower'** Hier wird der Switch ausgewaehlt, der das Geraet AN/AUS schaltet
-  - **'autoOff'** hier kann für das jeweilige Gerät aktiviert werden, ob es nach Beendigung ausgeschaltet werden soll
-  - **'startActive'** true = Nachricht bei Gerätestart aktiv, false = inaktiv
-  - **'startMessage'** individuelle Startnachricht für das Gerät festlegen
-  - **'endActive'** true = Nachricht bei Geräteende aktiv, false = inaktiv
-  - **'endMessage'** individuelle Endnachricht für das Gerät festlegen
-  - **'telegram'** true = telegram aktiv, false = inaktiv
-  - **'telegramUser'** ["Name","Name 2"] **Wichtig:** nur existierende Namen verwenden!
-  - **'alexa'** true = alexa aktiv, false = inaktiv
-  - **'alexaID'** ["DF56GFDDS15FD15G", "DF56GFDD5DS4F565G"] **Wichtig:** nur existierende IDs verwenden!
-    ![erstellung4jpg](/admin/erstellung4.jpg)
-  - **'whatsapp'** true = whatsapp aktiv, false = inaktiv
-  - **'whatsappID'** ["+4901234567890", "+490123626490"] **Wichtig:** nur existierende Nummern verwenden!<br>
-<br>
+## Geräte anlegen
 
-- Liste aktuell verfügbarer Gerätetypen (es muss das kürzel eingefügt werden, zb. wama):
-1. **Trockner** -> dryer
-2. **Waschmaschine** -> wama
-3. **Geschirrspueler** -> diwa
-4. **Computer** -> computer
-5. **Wasserkocher** -> wako
-6. **Test**' -> test <br>
+### Schaltaktor hinzufügen
+1. Das Anlegen eines Schaltaktors ist sehr einfach. man benötigt nur den Pfad zum Schalten und einen Timer, wie lange die Lampe eingeschaltet bleiben soll. Für jede neue Lampe die erste **Zahl forlaufend** erhöhen!<br>
 
-# eigenes Gerät erstellen
-Möchte man sich selber ein Gerät konfigurieren, bitte hier weiterlesen: <br>
-  Gerätetyp "test" nutzen : <br>
+  ![arrLights.png](/admin/arrLights.png)
 
-  ![eigenesObjekt.jpg](/admin/eigenesObjekt.jpg) <br>
+- **path**: Pfad zum Switch, der den Aktor schaltet
+- **timer**: Einschaltdauer des Aktors in Sekunden
 
-  entscheidend sind hier die 4 Zahlen in dem roten Kasten:
-  1. Schwelle **Startwert**, der überschritten werden muss um **"Gerät gestartet"** zu erkennen
-  2. Schwelle **Endwert**, der unterschritten werden muss um **"Gerät fertig"** zu erkennen
-  3. Anzahl Werte die aufgezeichnet werden, bevor **"Gerät gestartet"** ermittelt wird. Dies dient, um Spitzen oder Schwankungen bei den Werten abzufangen und beugt Falschmeldungen vor.
-  4. Anzahl Werte die aufgezeichnet werden, bevor **"Gerät fertig"** ermittelt wird. Bei Geräten die große Schwankungen im Verbrauch haben, sollte dieser Wert nicht zu gering gewählt werden!
+### Lichtsensor hinzufügen
+1. Als nächstes kann man optional einen oder mehrere Lichtsensoren integrieren. Für jeden neuen Lichtsensor die erste **Zahl forlaufend** erhöhen!<br><br>
 
-# Datenpunkte für weitere Verwendungen
-- Die Datenpunkte zur Anzeige in VIS werden automatisch standardmaessig unter "0_userdata.0.Verbrauch." angelegt. <br>
-  ![objekteVIS.jpg](/admin/objekteVIS.jpg) <br>
+  ![arrSensors.png](/admin/arrSensors.png)
 
-# Script-Updates einspielen
-- Solltet ihr auf eine neue Version des Scriptes updaten wollen, so braucht ihr -wenn nicht anders angegeben- nur den Teil ab <u>**"Bei updates muss erst ab hier kopiert und eingefügt werden, somit braucht man seine Geräteliste nicht jedes mal neu erstellen"**</u> kopieren und neu einfügen. So muss nicht jedes Mal der komplette Gerätepart oben neu angelegt werden.
+- **path**: Pfad zum Helligkeitswert den der Lichtsensor ausgibt
+- **value**: Schwellwert der unterschritten werden muss, damit das Licht eingeschaltet wird
+
+### Bewegungsmelder hinzufügen und alles verbinden
+1. Für jeden Bewegungsmelder muss ein eigenes Objekt angelegt werden. Keine Angst, hört sich kompliziert an, ist aber kinderleicht. Dazu einfach die erste Zeile kopieren oder diese hier nehmen '{ bwm: 'hier den Pfad zum DP "motion" einfuegen', lights: [1], sensors: [1] },' (ohne '')<br>
+
+  ![arrDevices.png](/admin/arrDevices.png)
+
+- **bwm**: Pfad zum Datenpunkt des Bewegungsmelders, der den **Motion Wert** zurückgibt (bspw occupancy)
+- **lights**: in die eckigen Klammern die im ersten Schritt angelegten Schaltaktoren eingeben (nur die Zahl!)
+- **sensors**: in die eckigen Klammern die im zweiten Schritt angelegten Lichtsensoren eingeben (nur die Zahl!). Sollte kein Lichtsensor vorhanden sein, einfach die Klammern leerlassen.
+
+Das wars dann auch schon. Nur noch speichern und das Script starten
+
+Viel Spaß dabei 
 
 
-# Changelog
-#### 12.09.2020 (V 1.2.1)
-- (Steffen Feldkamp)
-  - bugfix bei Zustand der einzelnen Schalter
 
-#### 12.09.2020 (V 1.2.0)
-- (Steffen Feldkamp)
-  - jedes Gerät ist nun komplett frei konfigurierbar
-  - readme angepasst und erweitert
 
-#### 09.09.2020 (V 1.0.1)
-- (Steffen Feldkamp)
-  - debug Einträge entfernt
+## Changelog
 
-#### 09.09.2020 (V 1.0)
-- (Steffen Feldkamp)
-  - Version stable
+### 0.2 (2020-12-11)
+* (xenon-s) zahlreiche Änderungen nach ersten Tests
 
-#### 06.09.2020 (V 0.4.2)
-- (Steffen Feldkamp)
-  - Fehler, dass zu viele Log Meldungen angezeigt werden, behoben
+### 0.1 (2020-12-11)
+* (xenon-s) initial commit
 
-#### 02.09.2020 (V 0.4.1)
-- (Steffen Feldkamp)
-  - Fehler behoben, dass getObject einen log Fehler ausgibt, wenn autoOff = false
-  - Erkennunsgenauigkeit der Geräte etwas verbessert
-  - Fehler behoben, dass Geräte nicht immer ausgeschaltet werden
-
-#### 02.09.2020 (V 0.4)
-- (Steffen Feldkamp)
-  - automatisches Ausschalten von Aktoren nach Beendigung des Vorgangs implementiert
-  - manual angepasst
-
-#### 02.09.2020 (V 0.3)
-- (Steffen Feldkamp)
-  - Laufzeit eingefuegt
-  - kleine Optimierungen eingefuegt bei if()-Abfragen
-  - Whatsapp Benachrichtung eingefuegt
-
-#### 02.09.2020 (V 0.2)
-- (Steffen Feldkamp)
-  - Fehler in der Berechnung, sowie kleinere Fehler behoben
-
-#### 01.09.2020 (V 0.1)
-- (Steffen Feldkamp)
-  - Bugfixes und änderung der Objekterstellung
-
-#### 01.09.2020 (V 0.0.1)
-- (Steffen Feldkamp)
-  - initial release
 
 # License
 MIT License
