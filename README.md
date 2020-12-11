@@ -22,24 +22,27 @@ Wird ein Lichtsensor verwendet, kann man ihn pro Bewegungsmelder zuordnen. Auch 
 ## Script erstellen
 Ein neues JS Script in iobroker erstellen und das Script aus "script-bwm-script.js" kopieren und einfügen. <br>
 
-  ![erstellung_1.png](/admin/erstellung_1.png)
-  ![erstellung_2.png](/admin/erstellung_2.png)
-  <br>
+![erstellung_1.png](/admin/erstellung_1.png) <br>
+![erstellung_2.png](/admin/erstellung_2.png) <br>
 
 ## Geräte anlegen
 
 ### Schaltaktor hinzufügen
 1. Das Anlegen eines Schaltaktors ist sehr einfach. man benötigt nur den Pfad zum Schalten und einen Timer, wie lange die Lampe eingeschaltet bleiben soll. Für jede neue Lampe die erste **Zahl forlaufend** erhöhen!<br>
 
-  ![arrLights.png](/admin/arrLights.png)
+    ![arrLights.png](/admin/arrLights.png)
 
 - **path**: Pfad zum Switch, der den Aktor schaltet
 - **timer**: Einschaltdauer des Aktors in Sekunden
 
 ### Lichtsensor hinzufügen
-1. Als nächstes kann man optional einen oder mehrere Lichtsensoren integrieren. Für jeden neuen Lichtsensor die erste **Zahl forlaufend** erhöhen! Wenn kein Lichtsensor vorhanden ist, einfach das vorhandene Objekt auskommentieren mit **//** ( // 1: { path: 'hier den Pfad zum DP "lightlevel" einfuegen', value: 15 }'<br>
+1. Als nächstes kann man optional einen oder mehrere Lichtsensoren integrieren. Für jeden neuen Lichtsensor die erste **Zahl forlaufend** erhöhen! Wenn kein Lichtsensor vorhanden ist, einfach das vorhandene Objekt auskommentieren mit **//**'<br>
 
-  ![arrSensors.png](/admin/arrSensors.png)
+    ![arrSensors.png](/admin/arrSensors.png) <br>
+  Sensor vorhanden
+
+    ![arrSensors_auskommentiert.png](/admin/arrSensors_auskommentiert.png) <br>
+  Sensor auskommentiert
 
 - **path**: Pfad zum Helligkeitswert den der Lichtsensor ausgibt
 - **value**: Schwellwert der unterschritten werden muss, damit das Licht eingeschaltet wird
@@ -47,7 +50,7 @@ Ein neues JS Script in iobroker erstellen und das Script aus "script-bwm-script.
 ### Bewegungsmelder hinzufügen und alles verbinden
 1. Für jeden Bewegungsmelder muss ein eigenes Objekt angelegt werden. Keine Angst, hört sich kompliziert an, ist aber kinderleicht. Dazu einfach die erste Zeile kopieren oder diese hier nehmen '{ bwm: 'hier den Pfad zum DP "motion" einfuegen', lights: [], sensors: [] },' (ohne '')<br>
 
-  ![arrDevices.png](/admin/arrDevices.png)
+    ![arrDevices.png](/admin/arrDevices.png)
 
 - **bwm**: Pfad zum Datenpunkt des Bewegungsmelders, der den **Motion Wert** zurückgibt (bspw occupancy)
 - **lights**: in die eckigen Klammern die im ersten Schritt angelegten Schaltaktoren eingeben (nur die Zahl!)
