@@ -37,7 +37,7 @@ Ein neues JS Script in iobroker erstellen und das Script aus "script-bwm-script.
 - **timer**: Einschaltdauer des Aktors in Sekunden
 
 ### Lichtsensor hinzufügen
-1. Als nächstes kann man optional einen oder mehrere Lichtsensoren integrieren. Für jeden neuen Lichtsensor die erste **Zahl forlaufend** erhöhen!<br><br>
+1. Als nächstes kann man optional einen oder mehrere Lichtsensoren integrieren. Für jeden neuen Lichtsensor die erste **Zahl forlaufend** erhöhen! Wenn kein Lichtsensor vorhanden ist, einfach das vorhandene Objekt auskommentieren mit **//** ( // 1: { path: 'hier den Pfad zum DP "lightlevel" einfuegen', value: 15 }'<br>
 
   ![arrSensors.png](/admin/arrSensors.png)
 
