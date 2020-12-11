@@ -53,8 +53,8 @@ Ein neues JS Script in iobroker erstellen und das Script aus "script-bwm-script.
     ![arrDevices.png](/admin/arrDevices.png)
 
 - **bwm**: Pfad zum Datenpunkt des Bewegungsmelders, der den **Motion Wert** zurückgibt (bspw occupancy)
-- **lights**: in die eckigen Klammern die im ersten Schritt angelegten Schaltaktoren eingeben (nur die Zahl!)
-- **sensors**: in die eckigen Klammern die im zweiten Schritt angelegten Lichtsensoren eingeben (nur die Zahl!). Sollte kein Lichtsensor vorhanden sein, einfach die Klammern leerlassen.
+- **lights**: in die eckigen Klammern die im ersten Schritt angelegten Schaltaktoren eingeben (nur die Zahlen der Aktoren, die vom jeweiligen Bewegungsmelder auch geschaltet werden sollen)
+- **sensors**: in die eckigen Klammern die im zweiten Schritt angelegten Lichtsensoren eingeben (nur die Zahlen der Lichtsensoren, die vom jeweiligen Bewegungsmelder auch beachtet werden sollen). Sollte kein Lichtsensor vorhanden sein, einfach die Klammern leerlassen.
 
 Das wars dann auch schon. Nur noch speichern und das Script starten
 
