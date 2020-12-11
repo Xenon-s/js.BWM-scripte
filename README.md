@@ -45,7 +45,7 @@ Ein neues JS Script in iobroker erstellen und das Script aus "script-bwm-script.
 - **value**: Schwellwert der unterschritten werden muss, damit das Licht eingeschaltet wird
 
 ### Bewegungsmelder hinzufügen und alles verbinden
-1. Für jeden Bewegungsmelder muss ein eigenes Objekt angelegt werden. Keine Angst, hört sich kompliziert an, ist aber kinderleicht. Dazu einfach die erste Zeile kopieren oder diese hier nehmen '{ bwm: 'hier den Pfad zum DP "motion" einfuegen', lights: [1], sensors: [1] },' (ohne '')<br>
+1. Für jeden Bewegungsmelder muss ein eigenes Objekt angelegt werden. Keine Angst, hört sich kompliziert an, ist aber kinderleicht. Dazu einfach die erste Zeile kopieren oder diese hier nehmen '{ bwm: 'hier den Pfad zum DP "motion" einfuegen', lights: [], sensors: [] },' (ohne '')<br>
 
   ![arrDevices.png](/admin/arrDevices.png)
 
