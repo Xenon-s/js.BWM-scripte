@@ -3,7 +3,7 @@
 [![Paypal Donation](https://img.shields.io/badge/paypal-donate%20%7C%20spenden-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3EYML5A4EMJCW&source=url)
 
 
-# js.BWM-Script: Bewegungsmelderscript für ioBroker (Version 0.2)
+# js.BWM-Script: Bewegungsmelderscript für ioBroker (Version 0.3)
 Dieses Script ermöglicht es, unzählige Bewegungsmelder, Schaltaktoren (Steckdosen, Lampen, etc.) und Lichtsensoren im ioBroker miteinander zu verknüpfen
 
 ## Was sollte beachtet werden und was ist möglich?
