@@ -65,6 +65,9 @@ Viel Spaß dabei
 
 ## Changelog
 
+### 0.3 (2020-01-20)
+* (Schmakus) Korrektur des Tippfehlers beim Sensorcheck
+
 ### 0.2 (2020-12-11)
 * (xenon-s) zahlreiche Änderungen nach ersten Tests
 
