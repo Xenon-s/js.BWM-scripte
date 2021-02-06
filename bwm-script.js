@@ -1,5 +1,5 @@
 // Script zum Schalten von Lampen per Bewegungsmelder (optional mit Helligkeitsabfrage)
-const version = `version 0.2`;
+const version = `version 0.2.2`;
 
 /* Lampen 
 die erste Zahl muss fortlaufend weitergeführt werden (wird später noch benötigt)
@@ -65,7 +65,7 @@ for (const i in arrSensors) {
 };
 
 for (const i in arrDevices) {
-    if (!getObject(arrDevices[i].bwm) || arrDevices[i].lights.length <= 0) {
+    if (!getObject(arrDevices[i].path) || arrDevices[i].lights.length <= 0) {
         console.warn(`BWM-Script: Folgendes Objekt ist fehlerhaft und wurde gelöscht: ${(JSON.stringify(arrDevices[i].bwm))}`);
         delete arrDevices[i];
     };
