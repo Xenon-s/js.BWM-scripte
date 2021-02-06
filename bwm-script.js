@@ -64,12 +64,12 @@ for (const i in arrSensors) {
     };
 };
 
-for (const i in arrDevices) {
-    if (!getObject(arrDevices[i].path) || arrDevices[i].lights.length <= 0) {
-        console.warn(`BWM-Script: Folgendes Objekt ist fehlerhaft und wurde gelöscht: ${(JSON.stringify(arrDevices[i].bwm))}`);
-        delete arrDevices[i];
-    };
-};
+// for (const i in arrDevices) {
+//     if (!getObject(arrDevices[i].path) || arrDevices[i].lights.length <= 0) {
+//         console.warn(`BWM-Script: Folgendes Objekt ist fehlerhaft und wurde gelöscht: ${(JSON.stringify(arrDevices[i].bwm))}`);
+//         delete arrDevices[i];
+//     };
+// };
 
 createTrigger(arrDevices, arrSensors, arrLights);
 
