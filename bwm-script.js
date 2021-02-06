@@ -1,5 +1,5 @@
 // Script zum Schalten von Lampen per Bewegungsmelder (optional mit Helligkeitsabfrage)
-const version = `version 0.2`;
+const version = `version 0.2.2`;
 
 /* Lampen 
 die erste Zahl muss fortlaufend weitergeführt werden (wird später noch benötigt)
