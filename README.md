@@ -65,6 +65,9 @@ Viel Spaß dabei
 
 ## Changelog
 
+### 0.2.2 (2020-02-06)
+* (ManuZz80* bugfix automatische Prüfung
+
 ### 0.2.1 (2020-01-20)
 * (Schmakus) Korrektur des Tippfehlers beim Sensorcheck
 
